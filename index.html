@@ -8,7 +8,8 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/white.css">
+		<!-- <link rel="stylesheet" href="dist/theme/white.css"> -->
+		<link rel="stylesheet" href="dist/theme/night.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -17,12 +18,12 @@
 		<div class="reveal">
 			<div class="slides">
 
-				<section data-background-image="static/metal-pattern.jpg" style="color: white;">
-					<h2 style="color: white;">Crowdsec and Mikrotik integration</h2>
+				<section data-background-image="static/metal-pattern.jpg">
+					<h2>CrowdSec and MikroTik integration</h2>
 					<img src="static/qrcode.png" style="width: 25%;"/>
 					<img src="static/mikrotik_plus_crowdsec_small_800.png" style="background-color: white; width: 70%;"/>
 					<br/>
-					<a style="color: white;" href="https://github.com/nvtkaszpir/cs-mikrotik-bouncer-alt">github.com/nvtkaszpir/cs-mikrotik-bouncer-alt</a>
+					<a href="https://github.com/nvtkaszpir/cs-mikrotik-bouncer-alt">github.com/nvtkaszpir/cs-mikrotik-bouncer-alt</a>
 					<br/>
 					<p>
 						<small>
@@ -34,20 +35,20 @@
 					</p>
 				</section>
 
-				<section data-background-color="black">
-					<h2 style="color: white;">About Me</h2>
+				<section data-background-image="static/metal-pattern.jpg">
+					<h2>About Me</h2>
 					<img src="static/avatar.png" />
 					<p>
 						Nobody cares about that :D
 					</p>
 				</section>
 
-				<section>
+				<section data-background-image="static/metal-pattern.jpg">
 					<h2>Agenda</h2>
 					<p>
 						<ul>
 						* What is CrowdSec <br/>
-						* What is Mikrotik <br/>
+						* What is MikroTik <br/>
 						* About integration <br/>
 						* Questions <br/>
 						</ul>
@@ -55,49 +56,194 @@
 				</section>
 
 				<section>
-					<section data-background-image="static/.jpg">
-					<h1 style="color: white;">What is CrowdSec</h1>
+					<section data-background-image="static/metal-pattern.jpg">
+					<img src="static/crowdsec_logo.png" style="width: 50%;"	>
+					<h2>What is CrowdSec</h2>
 					</section>
 
-					<section>
+					<section data-background-image="static/metal-pattern.jpg">
 					<p>
+					<h2>it is like a distributed Fail2Ban</h2>
+					<ul>
+						<li>parse input</li>
+						<li>extract important data</li>
+						<li>take action if pattern is found</li>
+					</ul>
+					</p>
+					... and much more...
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<p>
+					<ul>
+						<li>inputs - logs from various sources</li>
+						<li>extract - for example source IP</li>
+						<li>take action - remediation, do nothing etc</li>
+						<li>enrich - add more metadata such as ban time, reason...</li>
 					</p>
 					</section>
 
-					<section data-background-color="#EAFF80">
+					<section data-background-image="static/crowdsec_simplified_SE_overview.svg">
 					</section>
 
-					<section data-background-color="#FFf580">
+				</section>
+
+				<section data-background-image="static/metal-pattern.jpg">
+					<section>
+					<h2>CrowdSec Remediation</h2>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					Examples:
+					<ul>
+						<li>add bad IP to the block list referenced by iptables</li>
+						<li>execute a command</li>
+						<li>send bad IP and metadata to another service</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					Remediation via integration:
+					<ul>
+						<li>add bad IP to the block list referenced by iptables</li>
+						<li>execute a command</li>
+						<li>just expose list of blocked IP</li>
+						<li>send bad IP and metadata to another service</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					Remediation - bouncers:
+					<ul>
+						<li>one of the implementations of the blocking action</li>
+						<li>can be local - iptables/nftables/web app integration</li>
+						<li>can be remote - routers, CDN providers...</li>
+						<li>you can have multiple remediations at once</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					Remediation - bouncers - details:
+					<ul>
+						<li>CrowdSec ban is a 'decision' - what IP block, how long and why</li>
+						<li>when bouncer connects to the CrowdSec API it gets all decisions</li>
+						<li>after that bouncer streams down the incoming new decisions</li>
+					</ul>
+					</section>
+
+
+				</section>
+
+				<section>
+
+					<section data-background-image="static/wallpaper_mikrotik_6.png">
+					<h1>MikroTik</h1>
+					</section>
+
+					<section data-background-image="static/wallpaper_mikrotik_gray.png">
+					<h2>MikroTik does pretty good networking devices</h2>
+					<ul>
+						<li>in this setup it is a small home lab</li>
+						<li>devices can be controlled over API/CLI/web</li>
+						<li>can be scripted with commands used by RouterOS (CLI)</li>
+					</ul>
+
 					</section>
 
 				</section>
 
 				<section>
-					<section data-background-image="static/facb5a4661430adc.jpg">
-					<h2 style="color: white; ">
-						<!-- css is hard :D -->
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-						<br/>
-					</h2>
 
+					<section data-background-image="static/metal-pattern.jpg">
+					<img src="static/mikrotik_plus_crowdsec_small_800.png" style="background-color: white; width: 70%;"/>
+					<h2>Integration</h2>
 					</section>
 
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>Use MikroTik as bouncer in CrowdSec</h2>
+					<ul>
+						<li>do not code directly in the CrowdSec</li>
+						<li>do not call commands</li>
+						<li>do not use plaintext ban list or RouterOS code</li>
+					</ul>
+					</section>
 
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>Someone already did this</h2>
+					<ul>
+						<li>funkolab/cs-mikrotik-bouncer</li>
+					</ul>
+					<p>
+					great, let test this...
+					</p>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>... but it is slow!</h2>
+					<ul>
+						<li>direct MikroTik API calls - fast</li>
+						<li>adding IP to the firewall rule - fast</li>
+						<li>removing IP from the firewall rule - slow</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>removing IP from the firewall rule - slow</h2>
+					<ul>
+						<li>removing single IP address took seconds</li>
+						<li>apparently this is an issue how MikroTik does it</li>
+						<li>funkolab/cs-mikrotik-bouncer instance was out of sync</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>The fix - do not delete IP from the list</h2>
+					<ul>
+						<li>if the new decision comes in, just create a new list</li>
+						<li>add the IPs to the list</li>
+						<li>update MikroTik to use specific new list (atomic update)</li>
+						<li>let old list to expire on their own</li>
+					</ul>
+					</section>
+				</section>
+
+				<section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>Features</h2>
+					<ul>
+						<li>run as go binary, or in container</li>
+						<li>64MB per process or less</li>
+						<li>prometheus metrics - shiny graphs</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>Limitations</h2>
+					<ul>
+						<li>just IPv4/IPv6 on the firewall rules in MikroTik</li>
+						<li>very frequent changes can create many unused block lists</li>
+						<li>large lists vs older hardware</li>
+					</ul>
+					</section>
+
+					<section data-background-image="static/metal-pattern.jpg">
+					<h2>Future</h2>
+					<ul>
+						<li>return to single block list and allow IP to expire</li>
+						<li>IP address merging - from 10k records to 7k records</li>
+						<li>filters - split lists from CrowdSec and local block lists</li>
+					</ul>
 					</section>
 
 				</section>
 
-
 				<section data-background-image="static/metal-pattern.jpg">
 					<section>
-					<h1 style="color: white;">Q & A</h1>
+					<h1>Q & A</h1>
 					</section>
 					<section>
-					<h1 style="color: white;">Thank You!</h1>
+					<h1>Thank You!</h1>
 					<p>
 						<img src="static/qrcode.png" style="width: 50%;"/>
 					</p>
